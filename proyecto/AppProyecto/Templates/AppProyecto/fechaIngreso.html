@@ -7,7 +7,7 @@
 {% block contenido_que_cambia %}
 
 <h2>Ingreso fecha de llegada del Cliente y Mascota</h2>
-<h4>Ingrese datos del Cliente</h4>
+<h4>Ingrese datos del Cliente, formato de fecha es YYYY-MM-DD</h4>
 
 <form action="{% url 'fechaIngreso' %}" method="post"> {% csrf_token %}
     <table>

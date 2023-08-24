@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Gatos, Perros, Fecha_Ingreso, Clientes
 from django.http import HttpResponse
-from .forms import PerrosForm, GatosForm, Fecha_IngresoForm, ClienteForm 
+from .forms import PerrosForm, GatosForm, Fecha_IngresoForm, ClienteForm
 
 # Create your views here.
 
@@ -18,10 +18,10 @@ def crear_perro(request):
             nombre=info["nombre"]
             edad=info["edad"]
             raza=info["raza"]
-            perros=Perros(nombre=nombre,edad=edad,raza=raza)
-            Perros.save()
+            nuevo_perro=Perros(nombre=nombre,edad=edad,raza=raza)
+            nuevo_perro.save()
             formulario_perros=PerrosForm()
-            return render(request,"AppProyecto/perros.html", {"mensaje":"Paciente Creado", "formulario":formulario_perro})
+            return render(request,"AppProyecto/perros.html", {"mensaje":"Paciente Creado", "formulario":formulario_perros})
         else:
             return render(request,"AppProyecto/perros.html", {"mensaje":"Datos no validos"}) 
     else:
@@ -38,8 +38,8 @@ def crear_gato(request):
             info=form.cleaned_data
             nombre=info["nombre"]
             edad=info["edad"]
-            gatos=Gatos(nombre=nombre,edad=edad)
-            Gatos.save()
+            nuevo_gato=Gatos(nombre=nombre,edad=edad)
+            nuevo_gato.save()
             formulario_gatos=GatosForm()
             return render(request,"AppProyecto/gatos.html", {"mensaje":"Paciente Creado", "formulario":formulario_gatos})
         else:
@@ -58,12 +58,12 @@ def fecha_ingreso(request):
             info=form.cleaned_data
             dni=info["dni"]
             fecha_ingreso=info["fecha_ingreso"]
-            fecha_ingreso=fecha_ingreso(dni=dni,fecha_ingreso=fecha_ingreso)
-            cliente.save()
+            nuevo_ingreso=Fecha_Ingreso(dni=dni,fecha_ingreso=fecha_ingreso)
+            nuevo_ingreso.save()
             formulario_fecha_ingreso=Fecha_IngresoForm()
-            return render(request,"AppProyecto/fecha_ingreso.html", {"mensaje":"Cliente Ingresado a la Plataforma", "formulario":ingreso})
+            return render(request,"AppProyecto/fechaIngreso.html", {"mensaje":"Cliente Ingresado a la Plataforma", "formulario":formulario_fecha_ingreso})
         else:
-            return render(request,"AppProyecto/fecha_ingreso.html", {"mensaje":"Datos no validos"}) 
+            return render(request,"AppProyecto/fechaIngreso.html", {"mensaje":"Datos no validos"}) 
     else:
         formulario_fecha_ingreso=Fecha_IngresoForm()
 
@@ -80,8 +80,8 @@ def clientes(request):
             nombre=info["nombre"]
             apellido=info["apellido"]
             email=info["email"]
-            cliente=Cliente(dni=dni,nombre=nombre,apellido=apellido,email=email)
-            cliente.save()
+            nuevo_cliente=Clientes(dni=dni,nombre=nombre,apellido=apellido,email=email)
+            nuevo_cliente.save()
             formulario_cliente=ClienteForm()
             return render(request,"AppProyecto/clientes.html", {"mensaje":"Cliente Creado", "formulario":formulario_cliente})
         else:
