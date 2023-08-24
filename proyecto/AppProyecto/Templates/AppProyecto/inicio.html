@@ -3,16 +3,3 @@
 {% load static %}
 
 {% block titulo %} Plataforma Veterinaria Austral {% endblock %}
-
-{% block contenido_que_cambia %}
-<form action="{% url 'inicio' %}" method="GET">
-    
-    <input type="number" name="DNI" id="cliente" placeholder="Ingrese DNI Cliente">
-
-    <input type="submit" value="Buscar cliente">
-
-</form>
-
-<h2> {{ mensaje }}</h2>
-
-{% endblock %}

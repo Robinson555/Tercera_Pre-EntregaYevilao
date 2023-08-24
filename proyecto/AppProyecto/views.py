@@ -5,8 +5,23 @@ from .forms import PerrosForm, GatosForm, Fecha_IngresoForm, ClienteForm
 
 # Create your views here.
 
+#Inicio de Pagina
 def inicio(request):
     return render(request, "AppProyecto/inicio.html")
+
+#SECCION DE BUSQUEDA DE CLIENTE VETERINARIA
+
+def busquedaCliente(request):
+    return render(request, "AppProyecto/busquedaCliente.html")
+
+def resultadobusqueda(request): #se va a encargar de buscar los datos, va con el de arriba
+    dni=request.GET["dni"]
+    if dni!="":
+        dni=Clientes.objects.filter(dni__icontains=dni) #icontains(Contiene un digito y busca similitudes)
+        return render(request,"AppProyecto/resultadosCliente.html", {"clientes":dni})
+    else:
+        return render(request,"AppProyecto/busquedaCliente.html", {"mensaje":"No hay valores ingresados"})
+
 
 #SECCION VIEWS PERROS
 
@@ -29,6 +44,7 @@ def crear_perro(request):
 
     return render(request,"AppProyecto/perros.html", {"formulario":formulario_perros})
 
+
 #SECCION VIEWS GATOS
 
 def crear_gato(request):
@@ -49,6 +65,7 @@ def crear_gato(request):
 
     return render(request,"AppProyecto/gatos.html", {"formulario":formulario_gatos})
 
+
 #SECCION VIEWS PERROS
 
 def fecha_ingreso(request):
@@ -68,6 +85,7 @@ def fecha_ingreso(request):
         formulario_fecha_ingreso=Fecha_IngresoForm()
 
     return render(request,"AppProyecto/fechaIngreso.html", {"formulario":formulario_fecha_ingreso})
+
 
 #SECCION VIEWS CLIENTES
 
